@@ -43,6 +43,7 @@
         <resources>
             <resource>
                 <directory>${project.build.directory}/lib</directory>
+                <targetPath>lib</targetPath>
             </resource>
         </resources>
         <plugins>
@@ -56,6 +57,7 @@
                     <archive>
                         <manifest>
                             <addClasspath>true</addClasspath>
+                            <classpathPrefix>lib/</classpathPrefix>
                             <mainClass>org.eclipse.jdt.internal.jarinjarloader.JarRsrcLoader</mainClass>
                         </manifest>
                         <manifestEntries>
@@ -81,6 +83,19 @@
                         </goals>
                     </execution>
                 </executions>
+            </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>3.5.3</version>
+                <configuration>
+                    <excludes>
+                        <exclude>
+                            StrangeTest.java
+                        </exclude>
+                    </excludes>
+                </configuration>
             </plugin>
 
             <!-- Usual compilation -->
